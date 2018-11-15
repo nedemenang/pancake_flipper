@@ -4,7 +4,7 @@ import (
 	"os"
 	"log"
 	"fmt"
-	"unicode/utf8"
+	. "github.com/nedemenang/pancake_flipper/loop"
 )
 
 func main() {
@@ -22,41 +22,15 @@ func main() {
 	fmt.Scan(&t)
 
 	for ; t > 0; t-- {
-		flips := 0
-		impossible := false;
+		
 		fmt.Scan(&s,&k)
-	
-		sCount := utf8.RuneCountInString(string(s))
 
-		b := make([]bool, sCount)
-
-	
-		for i := 0; i < sCount; i++ {
-
-			if string(s[i]) == "+" {
-				b[i] = true
-			} else {
-				b[i] = false
-			}
-		}
-		for i := 0; i < sCount; i++ {
-			if !bool(b[i]) {
-				if i+k <= sCount {
-					flips++
-					for j := i; j < i+k; j++ {
-						b[j] = !b[j]
-					}
-				} else {
-					impossible = true
-					break
-				}
-			}
-		}
+		result := Loop(s, k)
 		count++
-		if impossible == false {
-			fmt.Printf("Case #%v: %v\n", count, flips)
-		} else {
-			fmt.Printf("Case #%v: IMPOSSIBLE\n", count)
-		}
+		fmt.Printf("Case #%v: %v\n", count, result)
 	}
 }
+
+
+
+
